@@ -211,13 +211,55 @@
         "className": ""
     },
     {
+        "id": "1369678ac7cc4a1d",
+        "type": "mqtt-broker",
+        "name": "EMQX Broker",
+        "broker": "broker.emqx.io",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "855fdbcfa6064758",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "b6717b9570d2649e",
+        "order": 2,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
         "id": "3cc11d24.ff01a2",
         "type": "comment",
         "z": "f6f2187d.f17ca8",
         "name": "WARNING: please check you have started this container with a volume that is mounted to /data\\n otherwise any flow changes are lost when you redeploy or upgrade the container\\n (e.g. upgrade to a more recent node-red docker image).\\n  If you are using named volumes you can ignore this warning.\\n Double click or see info side panel to learn how to start Node-RED in Docker to save your work",
         "info": "\nTo start docker with a bind mount volume (-v option), for example:\n\n```\ndocker run -it -p 1880:1880 -v /home/user/node_red_data:/data --name mynodered nodered/node-red\n```\n\nwhere `/home/user/node_red_data` is a directory on your host machine where you want to store your flows.\n\nIf you do not do this then you can experiment and redploy flows, but if you restart or upgrade the container the flows will be disconnected and lost. \n\nThey will still exist in a hidden data volume, which can be recovered using standard docker techniques, but that is much more complex than just starting with a named volume as described above.",
         "x": 350,
-        "y": 80,
+        "y": 100,
         "wires": []
     },
     {
@@ -230,12 +272,11 @@
         "upload": false,
         "skipBodyParsing": false,
         "swaggerDoc": "",
-        "x": 180,
-        "y": 320,
+        "x": 320,
+        "y": 300,
         "wires": [
             [
-                "e20b39b8caa19f91",
-                "399ba9f559e25837"
+                "8a79907e5de7923f"
             ]
         ]
     },
@@ -246,8 +287,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 450,
-        "y": 320,
+        "x": 790,
+        "y": 300,
         "wires": []
     },
     {
@@ -262,8 +303,163 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
+        "x": 780,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "8a79907e5de7923f",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 1",
+        "func": "if(typeof msg.payload === 'string') {\n    try {\n        msg.payload = JSON.parse(msg.payload);\n    } catch (error) {\n        // If parsing fails, send a 400 Bad Request error back\n        msg.statusCode = 400;\n        msg.payload = { status: \"error\", message: \"Invalid JSON format\" };\n        return msg;\n    }\n}\n\nmsg.statusCode = 200;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 300,
+        "wires": [
+            [
+                "e20b39b8caa19f91",
+                "399ba9f559e25837",
+                "d8da2f967c480b17",
+                "6af41733b70260da"
+            ]
+        ]
+    },
+    {
+        "id": "d8da2f967c480b17",
+        "type": "mqtt out",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "/testLED",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "1369678ac7cc4a1d",
+        "x": 780,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "6af41733b70260da",
+        "type": "ui_led",
+        "z": "f6f2187d.f17ca8",
+        "order": 0,
+        "group": "855fdbcfa6064758",
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "{\"type\": \"bool8\", \"value\": false}",
+                "valueType": "json"
+            },
+            {
+                "color": "#008000",
+                "value": "{\"type\": \"bool8\", \"value\": true}",
+                "valueType": "json"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 790,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "c8711bec935b96b2",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "/testLED",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "1369678ac7cc4a1d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
         "x": 460,
-        "y": 280,
+        "y": 480,
+        "wires": [
+            [
+                "011df2a4deb58d2f"
+            ]
+        ]
+    },
+    {
+        "id": "011df2a4deb58d2f",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "output from MQTT",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "800f98e0d0b6f6a5",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Hello World",
+        "payloadType": "str",
+        "x": 370,
+        "y": 220,
+        "wires": [
+            [
+                "33c2a549ef0715d9"
+            ]
+        ]
+    },
+    {
+        "id": "33c2a549ef0715d9",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 220,
         "wires": []
     }
 ]
