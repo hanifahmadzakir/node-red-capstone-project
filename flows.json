@@ -1,0 +1,922 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "726aeb7220087d28",
+        "type": "tab",
+        "label": "Nexo OpenProtocol",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c37632ec9c01ba67",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2bf02f0e5b65c193",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true
+    },
+    {
+        "id": "d1944438700711a1",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "d5a1288e1c6b4f3f",
+        "type": "ui-page",
+        "name": "Page 1",
+        "ui": "2bf02f0e5b65c193",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "d1944438700711a1",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": 0,
+                "cols": 3
+            },
+            {
+                "name": "Tablet",
+                "px": 576,
+                "cols": 6
+            },
+            {
+                "name": "Small Desktop",
+                "px": 768,
+                "cols": 9
+            },
+            {
+                "name": "Desktop",
+                "px": 1024,
+                "cols": 12
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": true,
+        "disabled": false
+    },
+    {
+        "id": "de40f4cee8925143",
+        "type": "ui-group",
+        "name": "Group 1",
+        "page": "d5a1288e1c6b4f3f",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": true,
+        "disabled": false,
+        "groupType": "default"
+    },
+    {
+        "id": "b6717b9570d2649e",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "d4a329dc368757a3",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "1f869ab44c5f4b55",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "b6717b9570d2649e",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3cc11d24.ff01a2",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "name": "WARNING: please check you have started this container with a volume that is mounted to /data\\n otherwise any flow changes are lost when you redeploy or upgrade the container\\n (e.g. upgrade to a more recent node-red docker image).\\n  If you are using named volumes you can ignore this warning.\\n Double click or see info side panel to learn how to start Node-RED in Docker to save your work",
+        "info": "\nTo start docker with a bind mount volume (-v option), for example:\n\n```\ndocker run -it -p 1880:1880 -v /home/user/node_red_data:/data --name mynodered nodered/node-red\n```\n\nwhere `/home/user/node_red_data` is a directory on your host machine where you want to store your flows.\n\nIf you do not do this then you can experiment and redploy flows, but if you restart or upgrade the container the flows will be disconnected and lost. \n\nThey will still exist in a hidden data volume, which can be recovered using standard docker techniques, but that is much more complex than just starting with a named volume as described above.",
+        "x": 350,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "cb3aac10f45805aa",
+        "type": "tcp-client",
+        "z": "726aeb7220087d28",
+        "action": "action",
+        "actionType": "msg",
+        "host": "host",
+        "hostType": "msg",
+        "port": "port",
+        "portType": "msg",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "",
+        "xmlAttrkey": "",
+        "xmlCharkey": "",
+        "xmlStrip": false,
+        "xmlArray": false,
+        "xmlNormalizeTags": false,
+        "xmlNormalize": false,
+        "write": "payload",
+        "writeType": "msg",
+        "topic": "",
+        "name": "",
+        "debug": "warning",
+        "x": 670,
+        "y": 120,
+        "wires": [
+            [
+                "c7a3a199b638cea5"
+            ]
+        ]
+    },
+    {
+        "id": "27a2799696b79407",
+        "type": "inject",
+        "z": "726aeb7220087d28",
+        "name": "write",
+        "props": [
+            {
+                "p": "action",
+                "v": "write",
+                "vt": "str"
+            },
+            {
+                "p": "host",
+                "v": "192.168.0.23",
+                "vt": "str"
+            },
+            {
+                "p": "port",
+                "v": "4545",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "05cba78303d3c032"
+            ]
+        ]
+    },
+    {
+        "id": "05cba78303d3c032",
+        "type": "function",
+        "z": "726aeb7220087d28",
+        "name": "Build MID 0001 (Connect)",
+        "func": "// MID 0001 (Communication Start) - Length 20 bytes\nconst MID_STRING = '00200001001000000000';\nconst NUL_BYTE = Buffer.from([0x00]);\n\n// Create a Buffer to ensure correct byte encoding\nlet buffer = Buffer.from(MID_STRING, 'ascii');\nmsg.payload = Buffer.concat([buffer, NUL_BYTE]);\n\nglobal.set('connectMID1', msg.payload)\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 200,
+        "wires": [
+            [
+                "cb3aac10f45805aa"
+            ]
+        ]
+    },
+    {
+        "id": "daaef7119465154c",
+        "type": "debug",
+        "z": "726aeb7220087d28",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "60140252d501fcf0",
+        "type": "function",
+        "z": "726aeb7220087d28",
+        "name": "Build MID 0060 (Subscribe)",
+        "func": "// MID 0001 (Communication Start) - Length 20 bytes\nconst MID_STRING = '00200060001000000000';\nconst NUL_BYTE = Buffer.from([0x00]);\n\n// Create a Buffer to ensure correct byte encoding\nlet buffer = Buffer.from(MID_STRING, 'ascii');\nmsg.payload = Buffer.concat([buffer, NUL_BYTE]);\n\nglobal.set('subsribeMID60', msg.payload)\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 260,
+        "wires": [
+            [
+                "cb3aac10f45805aa"
+            ]
+        ]
+    },
+    {
+        "id": "67430249245b2cb5",
+        "type": "inject",
+        "z": "726aeb7220087d28",
+        "name": "write",
+        "props": [
+            {
+                "p": "action",
+                "v": "write",
+                "vt": "str"
+            },
+            {
+                "p": "host",
+                "v": "192.168.0.23",
+                "vt": "str"
+            },
+            {
+                "p": "port",
+                "v": "4545",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 130,
+        "y": 260,
+        "wires": [
+            [
+                "60140252d501fcf0"
+            ]
+        ]
+    },
+    {
+        "id": "202a0dbc8909ccf1",
+        "type": "function",
+        "z": "726aeb7220087d28",
+        "name": "Build MID 9999 (Keep Alive)",
+        "func": "// MID 9999 (Keep Alive) - Length 20 bytes\nconst MID_STRING = '00209999001000000000';\nconst NUL_BYTE = Buffer.from([0x00]);\n\n// Create a Buffer to ensure correct byte encoding\nlet buffer = Buffer.from(MID_STRING, 'ascii');\nmsg.payload = Buffer.concat([buffer, NUL_BYTE]);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 320,
+        "wires": [
+            [
+                "cb3aac10f45805aa"
+            ]
+        ]
+    },
+    {
+        "id": "14c9615acad1b8be",
+        "type": "inject",
+        "z": "726aeb7220087d28",
+        "name": "write",
+        "props": [
+            {
+                "p": "action",
+                "v": "write",
+                "vt": "str"
+            },
+            {
+                "p": "host",
+                "v": "192.168.0.23",
+                "vt": "str"
+            },
+            {
+                "p": "port",
+                "v": "4545",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "10",
+        "topic": "",
+        "x": 130,
+        "y": 320,
+        "wires": [
+            [
+                "202a0dbc8909ccf1"
+            ]
+        ]
+    },
+    {
+        "id": "226ff07f2d1ecb70",
+        "type": "function",
+        "z": "726aeb7220087d28",
+        "name": "Parsing ASCII to JSON",
+        "func": "var output = msg.payload.toString(); // konversi Buffer ke string\nvar finalData = {};\n\nif (output.length <= 197) {\n    finalData = {\n        \"length\": output.slice(0, 4),\n        \"mid\": output.slice(4, 8),\n        \"revision\": output.slice(8, 11),\n        \"No ACK Flag\": output.slice(11, 20),\n        \"Data\": [\n            { \"name\": \"Cell ID\", \"value\": output.slice(22, 26) },\n            { \"name\": \"Channel ID\", \"value\": output.slice(28, 30) },\n            { \"name\": \"Controller Name\", \"value\": output.slice(32, 47) },\n            { \"name\": \"ID Code\", \"value\": \"-\" },\n            { \"name\": \"Job Number\", \"value\": output.slice(51, 53) },\n            { \"name\": \"Program Number\", \"value\": output.slice(55, 58) },\n            { \"name\": \"OK Limit\", \"value\": output.slice(60, 64) },\n            { \"name\": \"OK Value\", \"value\": output.slice(66, 70) },\n            { \"name\": \"Tightening Status\", \"value\": output.slice(72, 73) },\n            { \"name\": \"Torque Status\", \"value\": output.slice(75, 76) },\n            { \"name\": \"Angle Status\", \"value\": output.slice(78, 79) },\n            { \"name\": \"Min Torque\", \"value\": output.slice(81, 87) },\n            { \"name\": \"Max Torque\", \"value\": output.slice(89, 95) },\n            { \"name\": \"Target Torque\", \"value\": output.slice(97, 103) },\n            { \"name\": \"Actual Torque\", \"value\": output.slice(105, 111) },\n            { \"name\": \"Min Angle\", \"value\": output.slice(113, 118) },\n            { \"name\": \"Max Angle\", \"value\": output.slice(120, 125) },\n            { \"name\": \"Target Angle\", \"value\": output.slice(127, 132) },\n            { \"name\": \"Actual Angle\", \"value\": output.slice(134, 139) },\n            { \"name\": \"Timestamp\", \"value\": output.slice(141, 160) },\n            { \"name\": \"Last Change\", \"value\": output.slice(162, 181) },\n            { \"name\": \"Counter Status\", \"value\": output.slice(183, 184) },\n            { \"name\": \"Tightening ID\", \"value\": output.slice(186, 196) }\n        ]\n    };\n} else if (output.length >= 206) {\n    finalData = {\n        \"length\": output.slice(0, 4),\n        \"mid\": output.slice(4, 8),\n        \"revision\": output.slice(8, 11),\n        \"No ACK Flag\": output.slice(11, 20),\n        \"Data\": [\n            { \"name\": \"Cell ID\", \"value\": output.slice(22, 26) },\n            { \"name\": \"Channel ID\", \"value\": output.slice(28, 30) },\n            { \"name\": \"Controller Name\", \"value\": output.slice(32, 47) },\n            { \"name\": \"ID Code\", \"value\": output.slice(49, 58) },\n            { \"name\": \"Job Number\", \"value\": output.slice(60, 62) },\n            { \"name\": \"Program Number\", \"value\": output.slice(64, 67) },\n            { \"name\": \"OK Limit\", \"value\": output.slice(69, 73) },\n            { \"name\": \"OK Value\", \"value\": output.slice(75, 79) },\n            { \"name\": \"Tightening Status\", \"value\": output.slice(81, 82) },\n            { \"name\": \"Torque Status\", \"value\": output.slice(84, 85) },\n            { \"name\": \"Angle Status\", \"value\": output.slice(87, 88) },\n            { \"name\": \"Min Torque\", \"value\": output.slice(90, 96) },\n            { \"name\": \"Max Torque\", \"value\": output.slice(98, 104) },\n            { \"name\": \"Target Torque\", \"value\": output.slice(106, 112) },\n            { \"name\": \"Actual Torque\", \"value\": output.slice(114, 120) },\n            { \"name\": \"Min Angle\", \"value\": output.slice(122, 127) },\n            { \"name\": \"Max Angle\", \"value\": output.slice(129, 134) },\n            { \"name\": \"Target Angle\", \"value\": output.slice(136, 141) },\n            { \"name\": \"Actual Angle\", \"value\": output.slice(143, 148) },\n            { \"name\": \"Timestamp\", \"value\": output.slice(150, 169) },\n            { \"name\": \"Last Change\", \"value\": output.slice(171, 190) },\n            { \"name\": \"Counter Status\", \"value\": output.slice(192, 193) },\n            { \"name\": \"Tightening ID\", \"value\": output.slice(195, 205) }\n        ]\n    };\n} else {\n    finalData = { \"error\": \"Unexpected string length: \" + output.length };\n}\n\nflow.set('latestData', finalData)\n\nvar id = finalData.Data[3].value;\nvar program = finalData.Data[5].value;\nvar result = (finalData.Data[8].value === \"1\") ? \"OK\" : \"NOK\";\nvar finalTorque = Number(finalData.Data[14].value) / 100;\nvar finalAngle = Number(finalData.Data[18].value);\nvar timestamp = finalData.Data[19].value;\n\nif (finalData.mid === \"0061\") {\n    global.set('id', id);\n    global.set('program', program);\n    global.set('result', result);\n    global.set('finalTorque', finalTorque);\n    global.set('finalAngle', finalAngle);\n    global.set('timestamp', timestamp);\n} else {\n    return null\n}\n\n\nmsg.payload = finalData;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 180,
+        "wires": [
+            [
+                "daaef7119465154c",
+                "eceb34097080185a",
+                "c18ca2e189de80ac",
+                "c2d508ae7deb7f27",
+                "9e986cf81697eadc",
+                "2b163583f53bc543",
+                "6c4f99fd219be91e",
+                "cbea4ffbc6aa2163"
+            ]
+        ]
+    },
+    {
+        "id": "c7a3a199b638cea5",
+        "type": "change",
+        "z": "726aeb7220087d28",
+        "name": "Delete space",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": " ",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 100,
+        "wires": [
+            [
+                "226ff07f2d1ecb70"
+            ]
+        ]
+    },
+    {
+        "id": "eceb34097080185a",
+        "type": "function",
+        "z": "726aeb7220087d28",
+        "name": "Build MID 62 (ACK)",
+        "func": "if (msg.payload.mid === \"0061\") {\n    // MID 0001 (Communication Start) - Length 20 bytes\n    const MID_STRING = '00200062001000000000';\n    const NUL_BYTE = Buffer.from([0x00]);\n\n    // Create a Buffer to ensure correct byte encoding\n    let buffer = Buffer.from(MID_STRING, 'ascii');\n    msg.payload = Buffer.concat([buffer, NUL_BYTE]);\n    msg.action = \"write\";\n    msg.port = \"4545\";\n    msg.host = \"192.168.0.23\"\n} else {\n    return null\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 300,
+        "wires": [
+            [
+                "cb3aac10f45805aa"
+            ]
+        ]
+    },
+    {
+        "id": "46b821629873224a",
+        "type": "inject",
+        "z": "726aeb7220087d28",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 480,
+        "wires": [
+            [
+                "75c3a74c22f0e63a"
+            ]
+        ]
+    },
+    {
+        "id": "75c3a74c22f0e63a",
+        "type": "function",
+        "z": "726aeb7220087d28",
+        "name": "Global Result",
+        "func": "msg.payload = {\n    ID: global.get('id'),\n    Program: global.get('program'),\n    Result: global.get('result'),\n    Final_Torque: global.get('finalTorque'),\n    Final_Angle: global.get('finalAngle'),\n    Timestamp: global.get('timestamp')\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 480,
+        "wires": [
+            [
+                "6b76bb508e676829"
+            ]
+        ]
+    },
+    {
+        "id": "6b76bb508e676829",
+        "type": "debug",
+        "z": "726aeb7220087d28",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "223a8ac2b4283d8a",
+        "type": "function",
+        "z": "726aeb7220087d28",
+        "name": "Build MID 0003 (Close)",
+        "func": "// MID 0001 (Communication Start) - Length 20 bytes\nconst MID_STRING = '00200003001000000000';\nconst NUL_BYTE = Buffer.from([0x00]);\n\n// Create a Buffer to ensure correct byte encoding\nlet buffer = Buffer.from(MID_STRING, 'ascii');\nmsg.payload = Buffer.concat([buffer, NUL_BYTE]);\n\nglobal.set('connectMID1', msg.payload)\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 380,
+        "wires": [
+            [
+                "cb3aac10f45805aa"
+            ]
+        ]
+    },
+    {
+        "id": "56304a4b8da8c998",
+        "type": "inject",
+        "z": "726aeb7220087d28",
+        "name": "write",
+        "props": [
+            {
+                "p": "action",
+                "v": "write",
+                "vt": "str"
+            },
+            {
+                "p": "host",
+                "v": "192.168.0.23",
+                "vt": "str"
+            },
+            {
+                "p": "port",
+                "v": "4545",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "223a8ac2b4283d8a"
+            ]
+        ]
+    },
+    {
+        "id": "c18ca2e189de80ac",
+        "type": "function",
+        "z": "726aeb7220087d28",
+        "name": "ID Tightening",
+        "func": "msg.payload = global.get('id')\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1170,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c2d508ae7deb7f27",
+        "type": "function",
+        "z": "726aeb7220087d28",
+        "name": "Tightening Program",
+        "func": "msg.payload = global.get('program')\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1190,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9e986cf81697eadc",
+        "type": "function",
+        "z": "726aeb7220087d28",
+        "name": "Tightening Result",
+        "func": "msg.payload = global.get('result')\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1190,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2b163583f53bc543",
+        "type": "function",
+        "z": "726aeb7220087d28",
+        "name": "Torque",
+        "func": "msg.payload = global.get('finalTorque')\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1150,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6c4f99fd219be91e",
+        "type": "function",
+        "z": "726aeb7220087d28",
+        "name": "Angle",
+        "func": "msg.payload = global.get('finalAngle')\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1150,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cbea4ffbc6aa2163",
+        "type": "function",
+        "z": "726aeb7220087d28",
+        "name": "Timestamp",
+        "func": "msg.payload = global.get('timestamp')\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1170,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d425f032021b3af5",
+        "type": "http in",
+        "z": "c37632ec9c01ba67",
+        "name": "",
+        "url": "/ledON",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 230,
+        "y": 200,
+        "wires": [
+            [
+                "556f1bcd1cf46089",
+                "fd4186fd37ffcdb0",
+                "f3106b0e09fbb177"
+            ]
+        ]
+    },
+    {
+        "id": "556f1bcd1cf46089",
+        "type": "mqtt out",
+        "z": "c37632ec9c01ba67",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "x": 370,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "fd4186fd37ffcdb0",
+        "type": "function",
+        "z": "c37632ec9c01ba67",
+        "name": "function 1",
+        "func": "msg.payload = \"true\";\nmsg.statusCode = 200;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 260,
+        "wires": [
+            [
+                "221912713dc86335",
+                "4844bd64f3f43111"
+            ]
+        ]
+    },
+    {
+        "id": "f3106b0e09fbb177",
+        "type": "http response",
+        "z": "c37632ec9c01ba67",
+        "name": "",
+        "statusCode": "msg.statusCode",
+        "headers": {},
+        "x": 420,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "4844bd64f3f43111",
+        "type": "ui_led",
+        "z": "c37632ec9c01ba67",
+        "order": 0,
+        "group": "1f869ab44c5f4b55",
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "false",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "true",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 450,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "221912713dc86335",
+        "type": "debug",
+        "z": "c37632ec9c01ba67",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "c6dd41cd7f7f1c4a",
+        "type": "http in",
+        "z": "c37632ec9c01ba67",
+        "name": "",
+        "url": "/ledOFF",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 270,
+        "y": 320,
+        "wires": [
+            [
+                "d2cb51420a5a25ff",
+                "3f9f11fb616d4d25"
+            ]
+        ]
+    },
+    {
+        "id": "d2cb51420a5a25ff",
+        "type": "function",
+        "z": "c37632ec9c01ba67",
+        "name": "function 2",
+        "func": "msg.payload = \"false\";\nmsg.statusCode = 200;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 440,
+        "wires": [
+            [
+                "4844bd64f3f43111"
+            ]
+        ]
+    },
+    {
+        "id": "3f9f11fb616d4d25",
+        "type": "http response",
+        "z": "c37632ec9c01ba67",
+        "name": "",
+        "statusCode": "msg.statusCode",
+        "headers": {},
+        "x": 480,
+        "y": 520,
+        "wires": []
+    }
+]
