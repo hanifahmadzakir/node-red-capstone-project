@@ -2,7 +2,10 @@
     "name": "capstone_project",
     "description": "this is flow for capstone project",
     "version": "0.0.1",
-    "dependencies": {},
+    "dependencies": {
+        "node-red-contrib-ui-led": "0.4.11",
+        "node-red-dashboard": "3.6.6"
+    },
     "node-red": {
         "settings": {
             "flowFile": "flows.json",
