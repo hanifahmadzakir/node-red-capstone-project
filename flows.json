@@ -7,94 +7,6 @@
         "info": ""
     },
     {
-        "id": "2bf02f0e5b65c193",
-        "type": "ui-base",
-        "name": "My Dashboard",
-        "path": "/dashboard",
-        "appIcon": "",
-        "includeClientData": true,
-        "acceptsClientConfig": [
-            "ui-notification",
-            "ui-control"
-        ],
-        "showPathInSidebar": false,
-        "headerContent": "page",
-        "navigationStyle": "default",
-        "titleBarStyle": "default",
-        "showReconnectNotification": true,
-        "notificationDisplayTime": 1,
-        "showDisconnectNotification": true
-    },
-    {
-        "id": "d1944438700711a1",
-        "type": "ui-theme",
-        "name": "Default Theme",
-        "colors": {
-            "surface": "#ffffff",
-            "primary": "#0094CE",
-            "bgPage": "#eeeeee",
-            "groupBg": "#ffffff",
-            "groupOutline": "#cccccc"
-        },
-        "sizes": {
-            "density": "default",
-            "pagePadding": "12px",
-            "groupGap": "12px",
-            "groupBorderRadius": "4px",
-            "widgetGap": "12px"
-        }
-    },
-    {
-        "id": "d5a1288e1c6b4f3f",
-        "type": "ui-page",
-        "name": "Page 1",
-        "ui": "2bf02f0e5b65c193",
-        "path": "/page1",
-        "icon": "home",
-        "layout": "grid",
-        "theme": "d1944438700711a1",
-        "breakpoints": [
-            {
-                "name": "Default",
-                "px": 0,
-                "cols": 3
-            },
-            {
-                "name": "Tablet",
-                "px": 576,
-                "cols": 6
-            },
-            {
-                "name": "Small Desktop",
-                "px": 768,
-                "cols": 9
-            },
-            {
-                "name": "Desktop",
-                "px": 1024,
-                "cols": 12
-            }
-        ],
-        "order": 1,
-        "className": "",
-        "visible": true,
-        "disabled": false
-    },
-    {
-        "id": "de40f4cee8925143",
-        "type": "ui-group",
-        "name": "Group 1",
-        "page": "d5a1288e1c6b4f3f",
-        "width": 6,
-        "height": 1,
-        "order": 1,
-        "showTitle": true,
-        "className": "",
-        "visible": true,
-        "disabled": false,
-        "groupType": "default"
-    },
-    {
         "id": "b6717b9570d2649e",
         "type": "ui_tab",
         "name": "Home",
@@ -213,8 +125,8 @@
     {
         "id": "1369678ac7cc4a1d",
         "type": "mqtt-broker",
-        "name": "EMQX Broker",
-        "broker": "broker.emqx.io",
+        "name": "VPSBroker",
+        "broker": "http://103.93.160.128/",
         "port": 1883,
         "clientid": "",
         "autoConnect": true,
@@ -251,6 +163,94 @@
         "width": 6,
         "collapse": false,
         "className": ""
+    },
+    {
+        "id": "de40f4cee8925143",
+        "type": "ui-group",
+        "name": "Group 1",
+        "page": "d5a1288e1c6b4f3f",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": true,
+        "disabled": false,
+        "groupType": "default"
+    },
+    {
+        "id": "d1944438700711a1",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "d5a1288e1c6b4f3f",
+        "type": "ui-page",
+        "name": "Page 1",
+        "ui": "2bf02f0e5b65c193",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "d1944438700711a1",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": 0,
+                "cols": 3
+            },
+            {
+                "name": "Tablet",
+                "px": 576,
+                "cols": 6
+            },
+            {
+                "name": "Small Desktop",
+                "px": 768,
+                "cols": 9
+            },
+            {
+                "name": "Desktop",
+                "px": 1024,
+                "cols": 12
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": true,
+        "disabled": false
+    },
+    {
+        "id": "2bf02f0e5b65c193",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true
     },
     {
         "id": "3cc11d24.ff01a2",
@@ -303,7 +303,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 780,
+        "x": 820,
         "y": 260,
         "wires": []
     },
@@ -413,8 +413,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 730,
-        "y": 480,
+        "x": 810,
+        "y": 500,
         "wires": []
     },
     {
