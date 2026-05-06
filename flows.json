@@ -1,16 +1,9 @@
 [
     {
-        "id": "f6f2187d.f17ca8",
-        "type": "tab",
-        "label": "Flow 1",
-        "disabled": false,
-        "info": ""
-    },
-    {
         "id": "fb6f18224a2564ed",
         "type": "tab",
         "label": "API ESP32",
-        "disabled": false,
+        "disabled": true,
         "info": "",
         "env": []
     },
@@ -23,20 +16,26 @@
         "env": []
     },
     {
-        "id": "8a1379573da224c5",
-        "type": "tab",
-        "label": "Dummy Inject data from ESP32",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "3c72ba1d68a85f6e",
-        "type": "tab",
-        "label": "coba-coba",
-        "disabled": false,
-        "info": "",
-        "env": []
+        "id": "9eaadcc9e85595d2",
+        "type": "group",
+        "z": "fb6f18224a2564ed",
+        "name": "PIPELINE LOG PUMP -> EXPRESSJS",
+        "style": {
+            "stroke-dasharray": "0",
+            "fill": "#d3e3f3",
+            "fill-opacity": "0.5",
+            "label": true
+        },
+        "nodes": [
+            "930b09624c3850d4",
+            "c363e6ef2c9ca2a4",
+            "c0736c0a1d7fa876",
+            "857827693806d77a"
+        ],
+        "x": 34,
+        "y": 739,
+        "w": 1092,
+        "h": 82
     },
     {
         "id": "b6717b9570d2649e",
@@ -300,214 +299,35 @@
         "rejectUnauthorized": false
     },
     {
-        "id": "3cc11d24.ff01a2",
-        "type": "comment",
-        "z": "f6f2187d.f17ca8",
-        "name": "WARNING: please check you have started this container with a volume that is mounted to /data\\n otherwise any flow changes are lost when you redeploy or upgrade the container\\n (e.g. upgrade to a more recent node-red docker image).\\n  If you are using named volumes you can ignore this warning.\\n Double click or see info side panel to learn how to start Node-RED in Docker to save your work",
-        "info": "\nTo start docker with a bind mount volume (-v option), for example:\n\n```\ndocker run -it -p 1880:1880 -v /home/user/node_red_data:/data --name mynodered nodered/node-red\n```\n\nwhere `/home/user/node_red_data` is a directory on your host machine where you want to store your flows.\n\nIf you do not do this then you can experiment and redploy flows, but if you restart or upgrade the container the flows will be disconnected and lost. \n\nThey will still exist in a hidden data volume, which can be recovered using standard docker techniques, but that is much more complex than just starting with a named volume as described above.",
-        "x": 350,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "fb9ef4ff5a0c637e",
-        "type": "http in",
-        "z": "f6f2187d.f17ca8",
-        "name": "",
-        "url": "/led",
-        "method": "post",
-        "upload": false,
-        "skipBodyParsing": false,
-        "swaggerDoc": "",
-        "x": 320,
-        "y": 300,
-        "wires": [
-            [
-                "8a79907e5de7923f"
-            ]
-        ]
-    },
-    {
-        "id": "e20b39b8caa19f91",
-        "type": "http response",
-        "z": "f6f2187d.f17ca8",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 790,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "399ba9f559e25837",
-        "type": "debug",
-        "z": "f6f2187d.f17ca8",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 820,
-        "y": 260,
-        "wires": []
-    },
-    {
-        "id": "8a79907e5de7923f",
-        "type": "function",
-        "z": "f6f2187d.f17ca8",
-        "name": "function 1",
-        "func": "if(typeof msg.payload === 'string') {\n    try {\n        msg.payload = JSON.parse(msg.payload);\n    } catch (error) {\n        // If parsing fails, send a 400 Bad Request error back\n        msg.statusCode = 400;\n        msg.payload = { status: \"error\", message: \"Invalid JSON format\" };\n        return msg;\n    }\n}\n\nmsg.statusCode = 200;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 520,
-        "y": 300,
-        "wires": [
-            [
-                "e20b39b8caa19f91",
-                "399ba9f559e25837",
-                "d8da2f967c480b17",
-                "6af41733b70260da"
-            ]
-        ]
-    },
-    {
-        "id": "d8da2f967c480b17",
-        "type": "mqtt out",
-        "z": "f6f2187d.f17ca8",
-        "name": "",
-        "topic": "/testLED",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
+        "id": "621de813607e9aee",
+        "type": "mqtt-broker",
+        "name": "newvps",
+        "broker": "103.93.160.128",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
         "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "1369678ac7cc4a1d",
-        "x": 780,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "6af41733b70260da",
-        "type": "ui_led",
-        "z": "f6f2187d.f17ca8",
-        "order": 0,
-        "group": "855fdbcfa6064758",
-        "width": 0,
-        "height": 0,
-        "label": "",
-        "labelPlacement": "left",
-        "labelAlignment": "left",
-        "colorForValue": [
-            {
-                "color": "#ff0000",
-                "value": "{\"type\": \"bool8\", \"value\": false}",
-                "valueType": "json"
-            },
-            {
-                "color": "#008000",
-                "value": "{\"type\": \"bool8\", \"value\": true}",
-                "valueType": "json"
-            }
-        ],
-        "allowColorForValueInMessage": false,
-        "shape": "circle",
-        "showGlow": true,
-        "name": "",
-        "x": 790,
-        "y": 400,
-        "wires": []
-    },
-    {
-        "id": "c8711bec935b96b2",
-        "type": "mqtt in",
-        "z": "f6f2187d.f17ca8",
-        "name": "",
-        "topic": "/testLED",
-        "qos": "0",
-        "datatype": "auto-detect",
-        "broker": "1369678ac7cc4a1d",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 460,
-        "y": 480,
-        "wires": [
-            [
-                "011df2a4deb58d2f"
-            ]
-        ]
-    },
-    {
-        "id": "011df2a4deb58d2f",
-        "type": "debug",
-        "z": "f6f2187d.f17ca8",
-        "name": "output from MQTT",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 810,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "800f98e0d0b6f6a5",
-        "type": "inject",
-        "z": "f6f2187d.f17ca8",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "Hello World",
-        "payloadType": "str",
-        "x": 370,
-        "y": 220,
-        "wires": [
-            [
-                "33c2a549ef0715d9"
-            ]
-        ]
-    },
-    {
-        "id": "33c2a549ef0715d9",
-        "type": "debug",
-        "z": "f6f2187d.f17ca8",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 560,
-        "y": 220,
-        "wires": []
+        "sessionExpiry": ""
     },
     {
         "id": "3b24300acefb3de8",
@@ -617,10 +437,11 @@
         "rh": 0,
         "inputs": 0,
         "x": 130,
-        "y": 360,
+        "y": 340,
         "wires": [
             [
-                "save_to_memory"
+                "save_to_memory",
+                "ee6f0f1d40e5c953"
             ]
         ]
     },
@@ -644,7 +465,7 @@
         "to": "",
         "reg": false,
         "x": 370,
-        "y": 360,
+        "y": 340,
         "wires": [
             []
         ]
@@ -660,7 +481,7 @@
         "skipBodyParsing": false,
         "swaggerDoc": "",
         "x": 130,
-        "y": 420,
+        "y": 400,
         "wires": [
             [
                 "prepare_response"
@@ -675,7 +496,7 @@
         "statusCode": "",
         "headers": {},
         "x": 630,
-        "y": 420,
+        "y": 400,
         "wires": []
     },
     {
@@ -691,7 +512,7 @@
         "finalize": "",
         "libs": [],
         "x": 410,
-        "y": 420,
+        "y": 400,
         "wires": [
             [
                 "api_http_response"
@@ -705,7 +526,7 @@
         "name": "GET Pump status",
         "info": "",
         "x": 120,
-        "y": 300,
+        "y": 280,
         "wires": []
     },
     {
@@ -843,6 +664,279 @@
         "wires": []
     },
     {
+        "id": "ee6f0f1d40e5c953",
+        "type": "debug",
+        "z": "fb6f18224a2564ed",
+        "name": "pompa",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "bc7fc628c3cf5617",
+        "type": "mqtt in",
+        "z": "fb6f18224a2564ed",
+        "name": "LWT Status",
+        "topic": "kebun/device/status",
+        "qos": "0",
+        "datatype": "json",
+        "broker": "1369678ac7cc4a1d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 920,
+        "wires": [
+            [
+                "56674bcb71a709d8"
+            ]
+        ]
+    },
+    {
+        "id": "510594c075072fe3",
+        "type": "http request",
+        "z": "fb6f18224a2564ed",
+        "name": "",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.20:3001/api/devices/status",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 550,
+        "y": 920,
+        "wires": [
+            [
+                "c0411b4492c330fe"
+            ]
+        ]
+    },
+    {
+        "id": "56674bcb71a709d8",
+        "type": "change",
+        "z": "fb6f18224a2564ed",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "method",
+                "pt": "msg",
+                "to": "PATCH",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 920,
+        "wires": [
+            [
+                "510594c075072fe3"
+            ]
+        ]
+    },
+    {
+        "id": "c0411b4492c330fe",
+        "type": "debug",
+        "z": "fb6f18224a2564ed",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "294cf5041c4508fb",
+        "type": "mqtt in",
+        "z": "fb6f18224a2564ed",
+        "name": "",
+        "topic": "kebun/sensor/telemetri",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "1369678ac7cc4a1d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 1000,
+        "wires": [
+            [
+                "3b6e5e33c3df69ed"
+            ]
+        ]
+    },
+    {
+        "id": "3b6e5e33c3df69ed",
+        "type": "function",
+        "z": "fb6f18224a2564ed",
+        "name": "function 2",
+        "func": "\nreturn {\n    payload: {\n        device_id: 1,\n        temperature: msg.payload.temperature,\n        air_humidity: msg.payload.air_humidity,\n        light_intensity: msg.payload.light_intensity,\n        soil_moisture: msg.payload.soil_moisture\n\n    }\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 1000,
+        "wires": [
+            [
+                "220da4daa82cbbee"
+            ]
+        ]
+    },
+    {
+        "id": "30d25b7bcc642b85",
+        "type": "debug",
+        "z": "fb6f18224a2564ed",
+        "name": "telemetri",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "220da4daa82cbbee",
+        "type": "http request",
+        "z": "fb6f18224a2564ed",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.20:3001/api/sensor/evaluate",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 550,
+        "y": 1000,
+        "wires": [
+            [
+                "30d25b7bcc642b85"
+            ]
+        ]
+    },
+    {
+        "id": "930b09624c3850d4",
+        "type": "mqtt in",
+        "z": "fb6f18224a2564ed",
+        "g": "9eaadcc9e85595d2",
+        "name": "Accept ACK (kebun/pompa/status)",
+        "topic": "kebun/pompa/status",
+        "qos": "0",
+        "datatype": "json",
+        "broker": "1369678ac7cc4a1d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 780,
+        "wires": [
+            [
+                "c363e6ef2c9ca2a4"
+            ]
+        ]
+    },
+    {
+        "id": "c363e6ef2c9ca2a4",
+        "type": "function",
+        "z": "fb6f18224a2564ed",
+        "g": "9eaadcc9e85595d2",
+        "name": "put device_id & event",
+        "func": "// Msg.payload asli dari ESP32 adalah: {\"Pump\":\"OFF\",\"duration_seconds\":9}\n\nmsg.payload.device_id = 1; // Sesuai ID ESP32 di database\nmsg.payload.triggering_event = \"Automated System (Node-RED)\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 780,
+        "wires": [
+            [
+                "c0736c0a1d7fa876"
+            ]
+        ]
+    },
+    {
+        "id": "c0736c0a1d7fa876",
+        "type": "http request",
+        "z": "fb6f18224a2564ed",
+        "g": "9eaadcc9e85595d2",
+        "name": "POST /api/pump/log",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.20:3001/api/pump/log",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 760,
+        "y": 780,
+        "wires": [
+            [
+                "857827693806d77a"
+            ]
+        ]
+    },
+    {
+        "id": "857827693806d77a",
+        "type": "debug",
+        "z": "fb6f18224a2564ed",
+        "g": "9eaadcc9e85595d2",
+        "name": "ExpressJS reply",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 780,
+        "wires": []
+    },
+    {
         "id": "83b93e4312b11702",
         "type": "mqtt in",
         "z": "14437bce5f0e1854",
@@ -872,7 +966,7 @@
         "type": "debug",
         "z": "14437bce5f0e1854",
         "name": "debug 4",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -908,7 +1002,7 @@
         "type": "function",
         "z": "14437bce5f0e1854",
         "name": "parse Humidity",
-        "func": "msg.payload = msg.payload.humidity\nreturn msg;",
+        "func": "msg.payload = msg.payload.air_humidity\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1043,132 +1137,6 @@
         "bucket": "57ed17fdf21813b2",
         "x": 850,
         "y": 300,
-        "wires": []
-    },
-    {
-        "id": "inject_dummy",
-        "type": "inject",
-        "z": "8a1379573da224c5",
-        "name": "Trigger 1 Menit",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "60",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 260,
-        "y": 240,
-        "wires": [
-            [
-                "generate_dummy_json"
-            ]
-        ]
-    },
-    {
-        "id": "generate_dummy_json",
-        "type": "function",
-        "z": "8a1379573da224c5",
-        "name": "Generate Dummy",
-        "func": "function getRandom(min, max) {\n    return Math.random() * (max - min) + min;\n}\n\nmsg.payload = {\n    \"temperature\": parseFloat(getRandom(25.0, 35.0).toFixed(1)), // Suhu 25-35 C\n    \"humidity\": parseFloat(getRandom(50.0, 85.0).toFixed(1)),    // Kelembapan 50-85%\n    \"light_intensity\": Math.floor(getRandom(8000, 15000)),       // Cahaya 8000-15000 Lux\n    \"soil_moisture\": Math.floor(getRandom(30, 80))               // Tanah 30-80%\n};\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 490,
-        "y": 240,
-        "wires": [
-            [
-                "mqtt_out_telemetry",
-                "debug_dummy"
-            ]
-        ]
-    },
-    {
-        "id": "mqtt_out_telemetry",
-        "type": "mqtt out",
-        "z": "8a1379573da224c5",
-        "name": "Publish to MQTT",
-        "topic": "kebun/sensor/telemetri",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "1369678ac7cc4a1d",
-        "x": 810,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "debug_dummy",
-        "type": "debug",
-        "z": "8a1379573da224c5",
-        "name": "Cek Hasil JSON",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 780,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "0781f696458e0a35",
-        "type": "inject",
-        "z": "3c72ba1d68a85f6e",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 100,
-        "y": 120,
-        "wires": [
-            [
-                "06510cd9d7063d10"
-            ]
-        ]
-    },
-    {
-        "id": "06510cd9d7063d10",
-        "type": "debug",
-        "z": "3c72ba1d68a85f6e",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 360,
-        "y": 120,
         "wires": []
     }
 ]
