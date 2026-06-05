@@ -1,13 +1,5 @@
 [
     {
-        "id": "fb6f18224a2564ed",
-        "type": "tab",
-        "label": "API ESP32",
-        "disabled": true,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "14437bce5f0e1854",
         "type": "tab",
         "label": "InfluxDB",
@@ -16,9 +8,33 @@
         "env": []
     },
     {
-        "id": "9eaadcc9e85595d2",
+        "id": "8d6b6dfcf3939a8a",
+        "type": "tab",
+        "label": "API ESP32",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c376c7e05044f258",
+        "type": "tab",
+        "label": "API ESP32 v2",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2c503911848ea6d4",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "264deec881f362b3",
         "type": "group",
-        "z": "fb6f18224a2564ed",
+        "z": "8d6b6dfcf3939a8a",
         "name": "PIPELINE LOG PUMP -> EXPRESSJS",
         "style": {
             "stroke-dasharray": "0",
@@ -27,15 +43,55 @@
             "label": true
         },
         "nodes": [
-            "930b09624c3850d4",
-            "c363e6ef2c9ca2a4",
-            "c0736c0a1d7fa876",
-            "857827693806d77a"
+            "3a8cb214336dedfa",
+            "434fd384249b1ed1",
+            "1ef57f4b90990993",
+            "a4b97f9576239217"
         ],
         "x": 34,
-        "y": 739,
-        "w": 1092,
+        "y": 699,
+        "w": 1132,
         "h": 82
+    },
+    {
+        "id": "group_cuaca",
+        "type": "group",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "PROSES 1: API CUACA (Tiap 1 Jam)",
+        "style": {
+            "fill": "#e3f2fd",
+            "label": true
+        },
+        "nodes": [
+            "inject_cuaca",
+            "http_cuaca",
+            "parse_cuaca",
+            "debug_cuaca"
+        ],
+        "x": 54,
+        "y": 1099,
+        "w": 912,
+        "h": 82
+    },
+    {
+        "id": "group_sensor",
+        "type": "group",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "PROSES 2: RULES ENGINE (Tiap Data Masuk)",
+        "style": {
+            "fill": "#f1f8e9",
+            "label": true
+        },
+        "nodes": [
+            "mqtt_sensor",
+            "rules_engine",
+            "mqtt_pompa",
+            "debug_pompa"
+        ],
+        "x": 74,
+        "y": 1219,
+        "w": 732,
+        "h": 142
     },
     {
         "id": "b6717b9570d2649e",
@@ -330,613 +386,6 @@
         "sessionExpiry": ""
     },
     {
-        "id": "3b24300acefb3de8",
-        "type": "http in",
-        "z": "fb6f18224a2564ed",
-        "name": "",
-        "url": "/kebun/pompa/cmd",
-        "method": "post",
-        "upload": false,
-        "skipBodyParsing": false,
-        "swaggerDoc": "",
-        "x": 150,
-        "y": 160,
-        "wires": [
-            [
-                "093619859e739f0d"
-            ]
-        ]
-    },
-    {
-        "id": "8011d475b4d46dc7",
-        "type": "http response",
-        "z": "fb6f18224a2564ed",
-        "name": "Response 200 OK",
-        "statusCode": "",
-        "headers": {},
-        "x": 930,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "2f3d2dc7deef3d22",
-        "type": "comment",
-        "z": "fb6f18224a2564ed",
-        "name": "Turn on/off pump",
-        "info": "turn off\n{\"type\": \"bool8\", \"value\": false}\n\nturn on\n{\"type\": \"bool8\", \"value\": true}",
-        "x": 120,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "093619859e739f0d",
-        "type": "function",
-        "z": "fb6f18224a2564ed",
-        "name": "check if message is JSON",
-        "func": "if(typeof msg.payload === 'string') {\n    try {\n        msg.payload = JSON.parse(msg.payload);\n    } catch (error) {\n        // If parsing fails, send a 400 Bad Request error back\n        msg.statusCode = 400;\n        msg.payload = { status: \"error\", message: \"Invalid JSON format\" };\n        return msg;\n    }\n}\n\nmsg.statusCode = 200;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 410,
-        "y": 160,
-        "wires": [
-            [
-                "a0b2cbd355a2f29e"
-            ]
-        ]
-    },
-    {
-        "id": "4e6f3f5145bca6cb",
-        "type": "debug",
-        "z": "fb6f18224a2564ed",
-        "name": "Json payload",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 910,
-        "y": 120,
-        "wires": []
-    },
-    {
-        "id": "ae5057dbac63de79",
-        "type": "mqtt out",
-        "z": "fb6f18224a2564ed",
-        "name": "",
-        "topic": "kebun/pompa/cmd",
-        "qos": "0",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "1369678ac7cc4a1d",
-        "x": 930,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "mqtt_in_status",
-        "type": "mqtt in",
-        "z": "fb6f18224a2564ed",
-        "name": "",
-        "topic": "kebun/pompa/status",
-        "qos": "0",
-        "datatype": "auto-detect",
-        "broker": "1369678ac7cc4a1d",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 130,
-        "y": 340,
-        "wires": [
-            [
-                "save_to_memory",
-                "ee6f0f1d40e5c953"
-            ]
-        ]
-    },
-    {
-        "id": "save_to_memory",
-        "type": "change",
-        "z": "fb6f18224a2564ed",
-        "name": "save to memory",
-        "rules": [
-            {
-                "t": "set",
-                "p": "pumpStatus",
-                "pt": "flow",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 370,
-        "y": 340,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "api_http_in",
-        "type": "http in",
-        "z": "fb6f18224a2564ed",
-        "name": "GET Pump Status",
-        "url": "/kebun/pompa/status",
-        "method": "get",
-        "upload": false,
-        "skipBodyParsing": false,
-        "swaggerDoc": "",
-        "x": 130,
-        "y": 400,
-        "wires": [
-            [
-                "prepare_response"
-            ]
-        ]
-    },
-    {
-        "id": "api_http_response",
-        "type": "http response",
-        "z": "fb6f18224a2564ed",
-        "name": "Response 200 OK",
-        "statusCode": "",
-        "headers": {},
-        "x": 630,
-        "y": 400,
-        "wires": []
-    },
-    {
-        "id": "prepare_response",
-        "type": "function",
-        "z": "fb6f18224a2564ed",
-        "name": "GET from memory",
-        "func": "let lastStatus = flow.get(\"pumpStatus\") || { \"Pump\": \"UNKNOWN\" };\n\nmsg.payload = lastStatus;\nmsg.statusCode = 200;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 410,
-        "y": 400,
-        "wires": [
-            [
-                "api_http_response"
-            ]
-        ]
-    },
-    {
-        "id": "6b9ff8f71f7c7fa8",
-        "type": "comment",
-        "z": "fb6f18224a2564ed",
-        "name": "GET Pump status",
-        "info": "",
-        "x": 120,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "a0b2cbd355a2f29e",
-        "type": "change",
-        "z": "fb6f18224a2564ed",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload.payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 640,
-        "y": 160,
-        "wires": [
-            [
-                "4e6f3f5145bca6cb",
-                "8011d475b4d46dc7",
-                "ae5057dbac63de79"
-            ]
-        ]
-    },
-    {
-        "id": "e05019471a5a8a5f",
-        "type": "comment",
-        "z": "fb6f18224a2564ed",
-        "name": "GET Every Parameter data",
-        "info": "",
-        "x": 150,
-        "y": 520,
-        "wires": []
-    },
-    {
-        "id": "mqtt_in_telemetri",
-        "type": "mqtt in",
-        "z": "fb6f18224a2564ed",
-        "name": "",
-        "topic": "kebun/sensor/telemetri",
-        "qos": "0",
-        "datatype": "json",
-        "broker": "1369678ac7cc4a1d",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 160,
-        "y": 600,
-        "wires": [
-            [
-                "save_all_to_memory"
-            ]
-        ]
-    },
-    {
-        "id": "save_all_to_memory",
-        "type": "change",
-        "z": "fb6f18224a2564ed",
-        "name": "Save Latest Telemetry",
-        "rules": [
-            {
-                "t": "set",
-                "p": "latestTelemetry",
-                "pt": "flow",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 420,
-        "y": 600,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "http_in_latest_sensor",
-        "type": "http in",
-        "z": "fb6f18224a2564ed",
-        "name": "GET All Sensors",
-        "url": "/kebun/sensor/latest",
-        "method": "get",
-        "upload": false,
-        "skipBodyParsing": false,
-        "swaggerDoc": "",
-        "x": 140,
-        "y": 680,
-        "wires": [
-            [
-                "get_all_from_memory"
-            ]
-        ]
-    },
-    {
-        "id": "get_all_from_memory",
-        "type": "function",
-        "z": "fb6f18224a2564ed",
-        "name": "Retrieve from memory",
-        "func": "let latestData = flow.get(\"latestTelemetry\") || {\n    \"temperature\": 0,\n    \"humidity\": 0,\n    \"light_intensity\": 0,\n    \"soil_moisture\": 0,\n    \"status\": \"waiting for device...\"\n};\n\nmsg.payload = {\n    status: \"success\",\n    data: latestData\n};\nmsg.statusCode = 200;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 380,
-        "y": 680,
-        "wires": [
-            [
-                "http_res_latest_sensor"
-            ]
-        ]
-    },
-    {
-        "id": "http_res_latest_sensor",
-        "type": "http response",
-        "z": "fb6f18224a2564ed",
-        "name": "Response 200 OK",
-        "statusCode": "",
-        "headers": {},
-        "x": 630,
-        "y": 680,
-        "wires": []
-    },
-    {
-        "id": "ee6f0f1d40e5c953",
-        "type": "debug",
-        "z": "fb6f18224a2564ed",
-        "name": "pompa",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 650,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "bc7fc628c3cf5617",
-        "type": "mqtt in",
-        "z": "fb6f18224a2564ed",
-        "name": "LWT Status",
-        "topic": "kebun/device/status",
-        "qos": "0",
-        "datatype": "json",
-        "broker": "1369678ac7cc4a1d",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 130,
-        "y": 920,
-        "wires": [
-            [
-                "56674bcb71a709d8"
-            ]
-        ]
-    },
-    {
-        "id": "510594c075072fe3",
-        "type": "http request",
-        "z": "fb6f18224a2564ed",
-        "name": "",
-        "method": "use",
-        "ret": "obj",
-        "paytoqs": "ignore",
-        "url": "http://192.168.1.20:3001/api/devices/status",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 550,
-        "y": 920,
-        "wires": [
-            [
-                "c0411b4492c330fe"
-            ]
-        ]
-    },
-    {
-        "id": "56674bcb71a709d8",
-        "type": "change",
-        "z": "fb6f18224a2564ed",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "method",
-                "pt": "msg",
-                "to": "PATCH",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 340,
-        "y": 920,
-        "wires": [
-            [
-                "510594c075072fe3"
-            ]
-        ]
-    },
-    {
-        "id": "c0411b4492c330fe",
-        "type": "debug",
-        "z": "fb6f18224a2564ed",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 720,
-        "y": 920,
-        "wires": []
-    },
-    {
-        "id": "294cf5041c4508fb",
-        "type": "mqtt in",
-        "z": "fb6f18224a2564ed",
-        "name": "",
-        "topic": "kebun/sensor/telemetri",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "1369678ac7cc4a1d",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 160,
-        "y": 1000,
-        "wires": [
-            [
-                "3b6e5e33c3df69ed"
-            ]
-        ]
-    },
-    {
-        "id": "3b6e5e33c3df69ed",
-        "type": "function",
-        "z": "fb6f18224a2564ed",
-        "name": "function 2",
-        "func": "\nreturn {\n    payload: {\n        device_id: 1,\n        temperature: msg.payload.temperature,\n        air_humidity: msg.payload.air_humidity,\n        light_intensity: msg.payload.light_intensity,\n        soil_moisture: msg.payload.soil_moisture\n\n    }\n}",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 360,
-        "y": 1000,
-        "wires": [
-            [
-                "220da4daa82cbbee"
-            ]
-        ]
-    },
-    {
-        "id": "30d25b7bcc642b85",
-        "type": "debug",
-        "z": "fb6f18224a2564ed",
-        "name": "telemetri",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 740,
-        "y": 1000,
-        "wires": []
-    },
-    {
-        "id": "220da4daa82cbbee",
-        "type": "http request",
-        "z": "fb6f18224a2564ed",
-        "name": "",
-        "method": "POST",
-        "ret": "obj",
-        "paytoqs": "ignore",
-        "url": "http://192.168.1.20:3001/api/sensor/evaluate",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 550,
-        "y": 1000,
-        "wires": [
-            [
-                "30d25b7bcc642b85"
-            ]
-        ]
-    },
-    {
-        "id": "930b09624c3850d4",
-        "type": "mqtt in",
-        "z": "fb6f18224a2564ed",
-        "g": "9eaadcc9e85595d2",
-        "name": "Accept ACK (kebun/pompa/status)",
-        "topic": "kebun/pompa/status",
-        "qos": "0",
-        "datatype": "json",
-        "broker": "1369678ac7cc4a1d",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 200,
-        "y": 780,
-        "wires": [
-            [
-                "c363e6ef2c9ca2a4"
-            ]
-        ]
-    },
-    {
-        "id": "c363e6ef2c9ca2a4",
-        "type": "function",
-        "z": "fb6f18224a2564ed",
-        "g": "9eaadcc9e85595d2",
-        "name": "put device_id & event",
-        "func": "// Msg.payload asli dari ESP32 adalah: {\"Pump\":\"OFF\",\"duration_seconds\":9}\n\nmsg.payload.device_id = 1; // Sesuai ID ESP32 di database\nmsg.payload.triggering_event = \"Automated System (Node-RED)\";\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 480,
-        "y": 780,
-        "wires": [
-            [
-                "c0736c0a1d7fa876"
-            ]
-        ]
-    },
-    {
-        "id": "c0736c0a1d7fa876",
-        "type": "http request",
-        "z": "fb6f18224a2564ed",
-        "g": "9eaadcc9e85595d2",
-        "name": "POST /api/pump/log",
-        "method": "POST",
-        "ret": "obj",
-        "paytoqs": "ignore",
-        "url": "http://192.168.1.20:3001/api/pump/log",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 760,
-        "y": 780,
-        "wires": [
-            [
-                "857827693806d77a"
-            ]
-        ]
-    },
-    {
-        "id": "857827693806d77a",
-        "type": "debug",
-        "z": "fb6f18224a2564ed",
-        "g": "9eaadcc9e85595d2",
-        "name": "ExpressJS reply",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1000,
-        "y": 780,
-        "wires": []
-    },
-    {
         "id": "83b93e4312b11702",
         "type": "mqtt in",
         "z": "14437bce5f0e1854",
@@ -1137,6 +586,905 @@
         "bucket": "57ed17fdf21813b2",
         "x": 850,
         "y": 300,
+        "wires": []
+    },
+    {
+        "id": "2b194802a7404865",
+        "type": "http in",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "",
+        "url": "/kebun/pompa/cmd",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "c45fd293c4ccde01"
+            ]
+        ]
+    },
+    {
+        "id": "2049c55e9ccc8aac",
+        "type": "http response",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "Response 200 OK",
+        "statusCode": "",
+        "headers": {},
+        "x": 930,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "bfb6bc960a37dab1",
+        "type": "comment",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "Turn on/off pump",
+        "info": "turn off\n{\"type\": \"bool8\", \"value\": false}\n\nturn on\n{\"type\": \"bool8\", \"value\": true}",
+        "x": 120,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "c45fd293c4ccde01",
+        "type": "function",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "check if message is JSON",
+        "func": "if(typeof msg.payload === 'string') {\n    try {\n        msg.payload = JSON.parse(msg.payload);\n    } catch (error) {\n        // If parsing fails, send a 400 Bad Request error back\n        msg.statusCode = 400;\n        msg.payload = { status: \"error\", message: \"Invalid JSON format\" };\n        return msg;\n    }\n}\n\nmsg.statusCode = 200;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 160,
+        "wires": [
+            [
+                "0e5dda9333018d85"
+            ]
+        ]
+    },
+    {
+        "id": "30d5d7f0434fbbee",
+        "type": "debug",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "Json payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "9658bcfabb9c403c",
+        "type": "mqtt out",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "",
+        "topic": "kebun/pompa/cmd",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "1369678ac7cc4a1d",
+        "x": 930,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "6c443518357b0379",
+        "type": "mqtt in",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "",
+        "topic": "kebun/pompa/status",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "1369678ac7cc4a1d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 320,
+        "wires": [
+            [
+                "25ff6084b9ad2398",
+                "719a4edfb70c9893"
+            ]
+        ]
+    },
+    {
+        "id": "598ae2b8325d881a",
+        "type": "change",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "save to memory",
+        "rules": [
+            {
+                "t": "set",
+                "p": "pumpStatus",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "65cbaca9bb7af6be",
+        "type": "http in",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "GET Pump Status",
+        "url": "/kebun/pompa/status",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "c0980593de26cccd"
+            ]
+        ]
+    },
+    {
+        "id": "e4d0f35cd4d2c354",
+        "type": "http response",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "Response 200 OK",
+        "statusCode": "",
+        "headers": {},
+        "x": 630,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "c0980593de26cccd",
+        "type": "function",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "GET from memory",
+        "func": "let lastStatus = flow.get(\"pumpStatus\") || { \"Pump\": \"UNKNOWN\" };\n\nmsg.payload = lastStatus;\nmsg.statusCode = 200;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 380,
+        "wires": [
+            [
+                "e4d0f35cd4d2c354"
+            ]
+        ]
+    },
+    {
+        "id": "5ff532ae13b654af",
+        "type": "comment",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "GET Pump status",
+        "info": "",
+        "x": 120,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "0e5dda9333018d85",
+        "type": "change",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 160,
+        "wires": [
+            [
+                "30d5d7f0434fbbee",
+                "2049c55e9ccc8aac",
+                "9658bcfabb9c403c"
+            ]
+        ]
+    },
+    {
+        "id": "77c707212d9344bd",
+        "type": "comment",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "GET Every Parameter data",
+        "info": "",
+        "x": 150,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "0bbc0f7f37306e0b",
+        "type": "mqtt in",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "",
+        "topic": "kebun/sensor/telemetri",
+        "qos": "0",
+        "datatype": "json",
+        "broker": "1369678ac7cc4a1d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 540,
+        "wires": [
+            [
+                "8725d395bc495557"
+            ]
+        ]
+    },
+    {
+        "id": "8725d395bc495557",
+        "type": "change",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "Save Latest Telemetry",
+        "rules": [
+            {
+                "t": "set",
+                "p": "latestTelemetry",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7e995cdd97578a06",
+        "type": "http in",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "GET All Sensors",
+        "url": "/kebun/sensor/latest",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 620,
+        "wires": [
+            [
+                "0e774583bc6ab5ca"
+            ]
+        ]
+    },
+    {
+        "id": "0e774583bc6ab5ca",
+        "type": "function",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "Retrieve from memory",
+        "func": "let latestData = flow.get(\"latestTelemetry\") || {\n    \"temperature\": 0,\n    \"humidity\": 0,\n    \"light_intensity\": 0,\n    \"soil_moisture\": 0,\n    \"status\": \"waiting for device...\"\n};\n\nmsg.payload = {\n    status: \"success\",\n    data: latestData\n};\nmsg.statusCode = 200;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 620,
+        "wires": [
+            [
+                "4a642b80320049fb"
+            ]
+        ]
+    },
+    {
+        "id": "4a642b80320049fb",
+        "type": "http response",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "Response 200 OK",
+        "statusCode": "",
+        "headers": {},
+        "x": 610,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "25ff6084b9ad2398",
+        "type": "debug",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "pompa debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 380,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "4f643d7f60caa67d",
+        "type": "mqtt in",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "LWT Status",
+        "topic": "kebun/device/status",
+        "qos": "0",
+        "datatype": "json",
+        "broker": "1369678ac7cc4a1d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 860,
+        "wires": [
+            [
+                "09d98c9d48556e8a"
+            ]
+        ]
+    },
+    {
+        "id": "8dea035e9c89abaa",
+        "type": "http request",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://103.93.160.128:3001/api/devices/status",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 550,
+        "y": 860,
+        "wires": [
+            [
+                "b9b52d034ccb4add"
+            ]
+        ]
+    },
+    {
+        "id": "09d98c9d48556e8a",
+        "type": "change",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "method",
+                "pt": "msg",
+                "to": "PATCH",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 860,
+        "wires": [
+            [
+                "8dea035e9c89abaa"
+            ]
+        ]
+    },
+    {
+        "id": "b9b52d034ccb4add",
+        "type": "debug",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "LWT Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "5035ab976ed2580a",
+        "type": "mqtt in",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "",
+        "topic": "kebun/sensor/telemetri",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "1369678ac7cc4a1d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 1000,
+        "wires": [
+            [
+                "3fe6109af17ecbfe"
+            ]
+        ]
+    },
+    {
+        "id": "3fe6109af17ecbfe",
+        "type": "function",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "function 1",
+        "func": "\nreturn {\n    payload: {\n        device_id: 1,\n        temperature: msg.payload.temperature,\n        air_humidity: msg.payload.air_humidity,\n        light_intensity: msg.payload.light_intensity,\n        soil_moisture: msg.payload.soil_moisture\n\n    }\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 1000,
+        "wires": [
+            [
+                "b7b38d15173a39f0"
+            ]
+        ]
+    },
+    {
+        "id": "e542894017664041",
+        "type": "debug",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "telemetri debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "b7b38d15173a39f0",
+        "type": "http request",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://103.93.160.128:3001/api/sensor/evaluate",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 550,
+        "y": 1000,
+        "wires": [
+            [
+                "e542894017664041"
+            ]
+        ]
+    },
+    {
+        "id": "9a435d66906d72ec",
+        "type": "comment",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "LWT Stat",
+        "info": "YrXL5yGNiNiJmXnfAe5Fm1iyLM824wzdlp1re-Whb7m48goR9ruLPixf2Q7Q9L3Tnhs64T_5Qa-gIXUfmuNxOg==",
+        "x": 120,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "b4bef63301a68a6f",
+        "type": "comment",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "POST telemetry to Backend",
+        "info": "YrXL5yGNiNiJmXnfAe5Fm1iyLM824wzdlp1re-Whb7m48goR9ruLPixf2Q7Q9L3Tnhs64T_5Qa-gIXUfmuNxOg==",
+        "x": 180,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "3a8cb214336dedfa",
+        "type": "mqtt in",
+        "z": "8d6b6dfcf3939a8a",
+        "g": "264deec881f362b3",
+        "name": "Terima ACK (kebun/pompa/status)",
+        "topic": "kebun/pompa/status",
+        "qos": "0",
+        "datatype": "json",
+        "broker": "1369678ac7cc4a1d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 740,
+        "wires": [
+            [
+                "434fd384249b1ed1"
+            ]
+        ]
+    },
+    {
+        "id": "434fd384249b1ed1",
+        "type": "function",
+        "z": "8d6b6dfcf3939a8a",
+        "g": "264deec881f362b3",
+        "name": "put device_id & event",
+        "func": "\nmsg.payload.device_id = 1; \nmsg.payload.triggering_event = \"Automated System (Node-RED)\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 740,
+        "wires": [
+            [
+                "1ef57f4b90990993"
+            ]
+        ]
+    },
+    {
+        "id": "1ef57f4b90990993",
+        "type": "http request",
+        "z": "8d6b6dfcf3939a8a",
+        "g": "264deec881f362b3",
+        "name": "POST /api/pump/log",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://103.93.160.128:3001/api/pump/log",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 760,
+        "y": 740,
+        "wires": [
+            [
+                "a4b97f9576239217"
+            ]
+        ]
+    },
+    {
+        "id": "a4b97f9576239217",
+        "type": "debug",
+        "z": "8d6b6dfcf3939a8a",
+        "g": "264deec881f362b3",
+        "name": "reply from ExpressJS",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "719a4edfb70c9893",
+        "type": "function",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "function 2",
+        "func": "let statusData = msg.payload;\n\nstatusData.last_updated = new Date().toISOString();\n\nflow.set(\"pumpStatus\", statusData);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "inject_cuaca",
+        "type": "inject",
+        "z": "8d6b6dfcf3939a8a",
+        "g": "group_cuaca",
+        "name": "Trigger 1 Jam",
+        "repeat": "3600",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 1140,
+        "wires": [
+            [
+                "http_cuaca"
+            ]
+        ]
+    },
+    {
+        "id": "http_cuaca",
+        "type": "http request",
+        "z": "8d6b6dfcf3939a8a",
+        "g": "group_cuaca",
+        "name": "Get OpenWeather",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://api.openweathermap.org/data/2.5/forecast?lat=-6.5944&lon=106.7892&appid=API_KEY_KAMU",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 390,
+        "y": 1140,
+        "wires": [
+            [
+                "parse_cuaca"
+            ]
+        ]
+    },
+    {
+        "id": "parse_cuaca",
+        "type": "function",
+        "z": "8d6b6dfcf3939a8a",
+        "g": "group_cuaca",
+        "name": "Simpan Probabilitas",
+        "func": "// Ambil data 'pop' (Probability of Precipitation) dari ramalan 3 jam ke depan\nlet pop = msg.payload.list[0].pop * 100;\n\nglobal.set('probabilitas_hujan', pop);\n\nmsg.payload = 'Data API ter-update! Peluang hujan: ' + pop + '%';\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 1140,
+        "wires": [
+            [
+                "debug_cuaca"
+            ]
+        ]
+    },
+    {
+        "id": "debug_cuaca",
+        "type": "debug",
+        "z": "8d6b6dfcf3939a8a",
+        "g": "group_cuaca",
+        "name": "Log Cuaca",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "mqtt_sensor",
+        "type": "mqtt in",
+        "z": "8d6b6dfcf3939a8a",
+        "g": "group_sensor",
+        "name": "Sensor Kelembaban",
+        "topic": "kebun/sensor/telemetri",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "1369678ac7cc4a1d",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 190,
+        "y": 1280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "rules_engine",
+        "type": "function",
+        "z": "8d6b6dfcf3939a8a",
+        "g": "group_sensor",
+        "name": "Evaluasi (Sensor + API)",
+        "func": "let sensor = msg.payload;\nlet kelembaban = sensor.soil_moisture;\n\nlet prob_hujan = global.get('probabilitas_hujan') || 0;\n\n// ==========================================\n// PENGAMBILAN KEPUTUSAN\n// ==========================================\n\nif (kelembaban >= 70) {\n    // KONDISI 1: Tanah Basah (Aman)\n    msg.payload = \"OFF\";\n    \n} else if (kelembaban < 40 && prob_hujan < 50) {\n    // KONDISI 2: Tanah Kering & Cuaca Cerah\n    msg.payload = \"ON\";\n    \n} else if (kelembaban < 40 && prob_hujan >= 50) {\n    // KONDISI 3: Tanah Kering TAPI Akan Hujan!\n    // Tahan pompa untuk hemat energi\n    msg.payload = \"OFF\";\n    \n} else {\n    // Kondisi netral (di antara 40-70%), tidak mengubah status pompa\n    return null; \n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 1280,
+        "wires": [
+            [
+                "debug_pompa"
+            ]
+        ]
+    },
+    {
+        "id": "mqtt_pompa",
+        "type": "mqtt out",
+        "z": "8d6b6dfcf3939a8a",
+        "g": "group_sensor",
+        "name": "Aktuator Pompa",
+        "topic": "kebun/pompa/cmd",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "1369678ac7cc4a1d",
+        "x": 700,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "debug_pompa",
+        "type": "debug",
+        "z": "8d6b6dfcf3939a8a",
+        "g": "group_sensor",
+        "name": "Log Pompa",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "inject_hujan",
+        "type": "inject",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "Simulasi: Akan Hujan (85%)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "85",
+        "payloadType": "num",
+        "x": 200,
+        "y": 1420,
+        "wires": [
+            [
+                "set_global_cuaca"
+            ]
+        ]
+    },
+    {
+        "id": "inject_cerah",
+        "type": "inject",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "Simulasi: Cerah (10%)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 180,
+        "y": 1480,
+        "wires": [
+            [
+                "set_global_cuaca"
+            ]
+        ]
+    },
+    {
+        "id": "set_global_cuaca",
+        "type": "change",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "Ubah Global Cuaca",
+        "rules": [
+            {
+                "t": "set",
+                "p": "probabilitas_hujan",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 1440,
+        "wires": [
+            [
+                "debug_global"
+            ]
+        ]
+    },
+    {
+        "id": "debug_global",
+        "type": "debug",
+        "z": "8d6b6dfcf3939a8a",
+        "name": "Cek Memori Cuaca",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 1440,
         "wires": []
     }
 ]
